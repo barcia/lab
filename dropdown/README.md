@@ -8,7 +8,8 @@ openByIndex: open some by index array. Is is enable onlyShowOne, only open the f
 
 openAll: Open all. Is is enable onlyShowOne, only open the first.
 
-##single
+# Dropdown
+* [Demo](https://barcia.github.io/lab/dropdown/single.html)
 
 ### Extra features
 * Animated open and close
