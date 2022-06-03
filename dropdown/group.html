@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dropdown group</title>
+	<link rel="stylesheet" href="./style.css">
+	<script src="./script.js"></script>
+</head>
+<body>
+
+	<section class="DetailsGroup">
+		<details>
+			<summary> Title </summary>
+			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
+		</details>
+		<details>
+			<summary> Title </summary>
+			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
+		</details>
+		<details>
+			<summary> Title </summary>
+			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
+		</details>
+		<details>
+			<summary> Title </summary>
+			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
+		</details>
+	</section>
+
+	<script>
+		const AccordionGroups =
+		Array.from(document.querySelectorAll('.DetailsGroup'))
+		.map((el) => {
+			return new AccordionGroup(el, onlyOneOpen = true);
+		});
+	</script>
+</body>
+</html>
