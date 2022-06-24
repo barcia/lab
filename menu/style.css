@@ -1,0 +1,83 @@
+details {
+	--animationTime: 300ms;
+	--width: 300px
+}
+
+summary {
+	list-style: none;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+/* Backdrop */
+summary::before {
+	content: '';
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 0;
+	width: 0;
+	background-color: hsl(0 0% 0% / 0.3);
+}
+
+details[open] summary::before {
+	transition: height step-start, width step-start;
+	transition-duration: var(--animationTime);
+	height: 100vh;
+	height: 100dvh;
+	width: 100vw;
+	width: 100dvw;
+	animation: show-backdrop var(--animationTime) ease-out;
+}
+
+details.is-closing summary::before {
+	transition: height step-end, width step-end;
+	transition-duration: var(--animationTime);
+	height: 0;
+	width: 0;
+	animation: hide-backdrop var(--animationTime) ease-in;
+}
+
+
+
+#drawer {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: var(--width);
+	max-width: 80vw;
+	height: 100vh;
+	height: 100dvh;
+	background-color: antiquewhite;
+}
+
+details[open] #drawer {
+	animation: show-menu var(--animationTime) ease-out;
+}
+
+details.is-closing #drawer {
+	animation: hide-menu var(--animationTime) ease-in;
+}
+
+@keyframes show-menu {
+	from { transform: translateX(calc( var(--width) * -1 )); }
+	to { transform: translateX(0); }
+}
+
+@keyframes hide-menu {
+	from { transform: translateX(0); }
+	to { transform: translateX(calc( var(--width) * -1 )); }
+}
+
+@keyframes show-backdrop {
+	from {opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes hide-backdrop {
+	from {opacity: 1; }
+	to { opacity: 0; }
+}
