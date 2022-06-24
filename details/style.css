@@ -1,7 +1,5 @@
 details {
 	--animationSpeedMs: 100ms;
-
-	/* border: 1px solid black; */
 }
 
 summary {
@@ -11,13 +9,12 @@ summary {
 	cursor: pointer;
 	padding: 0.5rem;
 	background-color: #f5f5f5;
+	list-style: none;
 }
 
-summary::marker {
-	font-size: 0;
+summary::-webkit-details-marker {
+	display: none;
 }
-
-
 
 
 summary::before {

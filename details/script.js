@@ -4,37 +4,37 @@ const isArrowUpKey = ev => ev.key === 'ArrowUp' || ev.keyCode === 38;
 const isArrowDownKey = ev => ev.key === 'ArrowDown' || ev.keyCode === 40;
 const isEscKey = ev => ev.key === 'Escape' || ev.keyCode === 27;
 
-class Accordion {
+class Details {
 	// The default constructor for each accordion
 	constructor(element) {
-		 // Store the <details> element
-		 this.element = element;
-		 // Store the <summary> element
-		 this.summary = element.querySelector('summary');
-		 // Store the <div> sibling element
-		 this.content = this.summary.nextElementSibling;
+		// Store the <details> element
+		this.element = element;
+		// Store the <summary> element
+		this.summary = element.querySelector('summary');
+		// Store the sibling element
+		this.content = this.summary.nextElementSibling;
 
-		 this.animationSpeedMs = parseInt(getComputedStyle(this.element).getPropertyValue( '--animationSpeedMs' ))
+		this.animationSpeedMs = parseInt(getComputedStyle(this.element).getPropertyValue( '--animationSpeedMs' ))
 
-		 // Store the animation object (so we can cancel it, if needed)
-		 this.animation = null;
-		 // Store if the element is closing
-		 this.isClosing = false;
-		 // Store if the element is expanding
-		 this.isExpanding = false;
-		 // Detect user clicks on the summary element
-		 this.summary.addEventListener('click', (ev) => this.#onClick(ev));
-			this.summary.addEventListener("keydown", (ev) => {
-				if (isArrowRightKey(ev)) {
-					!this.state && this.open()
-				}
-				if (isArrowLeftKey(ev)) {
-					this.state && this.close()
-				}
-				if (isEscKey(ev)) {
-					this.state && this.close()
-				}
-			})
+		// Store the animation object (so we can cancel it, if needed)
+		this.animation = null;
+		// Store if the element is closing
+		this.isClosing = false;
+		// Store if the element is expanding
+		this.isExpanding = false;
+		// Detect user clicks on the summary element
+		this.summary.addEventListener('click', (ev) => this.#onClick(ev));
+		this.summary.addEventListener("keydown", (ev) => {
+			if (isArrowRightKey(ev)) {
+				!this.state && this.open()
+			}
+			if (isArrowLeftKey(ev)) {
+				this.state && this.close()
+			}
+			if (isEscKey(ev)) {
+				this.state && this.close()
+			}
+		})
 
 		 this.openEvent = new Event('open');
 		 this.closeEvent = new Event('close');
@@ -77,8 +77,10 @@ class Accordion {
 		// Wait for the next frame to call the expand function
 		this.element.dispatchEvent(this.openEvent);
 		window.requestAnimationFrame(() => {
+
 			// Set the element as "being expanding"
 			this.isExpanding = true;
+			// this.element.classList.add('is-expanding');
 
 			// If there is already an animation running
 			if (this.animation) {
@@ -93,6 +95,7 @@ class Accordion {
 				duration: this.animationSpeedMs,
 				easing: 'ease'
 			});
+			console.log(this.animation);
 			// When the animation is complete, call #onAnimationFinish()
 			this.animation.onfinish = () => {
 				this.#onAnimationFinish(true)
@@ -166,16 +169,16 @@ class Accordion {
 	get state() {
 		return this.element.open;
 	}
-	set state(state) {
-		this.element.open = state;
+	set state(isOpen) {
+		this.element.open = isOpen;
 	}
-  }
+}
 
 
-class AccordionGroup {
+class DetailsGroup {
 	constructor(element, onlyOneOpen = false) {
 		this.element = element;
-		this.items = Array.from(this.element.querySelectorAll('details')).map(item => new Accordion(item))
+		this.items = Array.from(this.element.querySelectorAll('details')).map(item => new Details(item))
 		this.onlyOneOpen = onlyOneOpen
 		this.currentItem = undefined
 		this.currentItemIndex = undefined

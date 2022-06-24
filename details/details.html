@@ -4,20 +4,20 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dropdown single</title>
+	<title>Details single</title>
 	<link rel="stylesheet" href="./style.css">
 	<script src="./script.js"></script>
 </head>
 <body>
 
 	<details>
-		<summary> Title </summary>
+		<summary>Title</summary>
 		<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
 	</details>
 
 	<script>
 		document.querySelectorAll('details').forEach((el) => {
-			new Accordion(el);
+			new Details(el);
 		});
 	</script>
 </body>
