@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Color Scheme</title>
+	<script defer src="./script.js"></script>
+
+	<style>
+		html[data-colorscheme="dark"] {
+			background-color: black;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<input type="radio" id="cslight" name="colorscheme" value="light">
+	<label for="cslight">Light</label>
+
+	<input type="radio" id="csauto" name="colorscheme" value="auto" checked>
+	<label for="csauto">Auto</label>
+
+	<input type="radio" id="csdark" name="colorscheme" value="dark">
+	<label for="csdark">Dark</label>
+</body>
+</html>
