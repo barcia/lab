@@ -16,7 +16,9 @@ class Tabs {
 
 		// Check if any tab if pre-selected. Otherwise, select the first tab.
 		const preSelectedTab = this.tabs.find( tab => tab.getAttribute("aria-selected") === "true" );
-		preSelectedTab ? this.#select(preSelectedTab) : this.#select(this.tabs[0]);
+		preSelectedTab
+		? this.#select(preSelectedTab)
+		: this.#select(this.tabs[0]);
 
 		// Move with key arrows
 		this.tabList.addEventListener("keydown", (e) => {
@@ -27,7 +29,7 @@ class Tabs {
 				isArrowRightKey(e) && currentTabIndex++;
 
 				if (currentTabIndex < 0) currentTabIndex = this.tabs.length - 1;
-				if (currentTabIndex >= this.tabs.length) currentTabIndex = 0;
+				if (currentTabIndex > this.tabs.length -1) currentTabIndex = 0;
 
 				this.#select(this.tabs[currentTabIndex]);
 				this.tabs[currentTabIndex].focus();
@@ -100,10 +102,8 @@ class Tabs {
 	}
 }
 
-const TabsElements = Array.from(document.querySelectorAll(".Tabs"));
+const TabsElements = Array
+	.from(document.querySelectorAll(".Tabs"))
+	.map((element) => new Tabs(element))
 
-const created = TabsElements.map((element) => new Tabs(element));
-
-const myTab = created.find(tab => tab.element.id === "proba");
-
-myTab.selectByIndex(1);
+	const myTab = TabsElements.find(tab => tab.element.id === "proba");
