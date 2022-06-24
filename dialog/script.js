@@ -11,8 +11,13 @@ class Modal {
 
 	show() {
 		this.element.showModal()
-		this.closer.focus()
 		if (this.lockScroll) this.body.style.overflowY = 'hidden'
+
+		this.element.addEventListener('click', (ev) => {
+			if (ev.target.nodeName === 'DIALOG') {
+				this.close()
+			}
+		})
 
 		this.closer.addEventListener('click', () => {
 			this.close()
