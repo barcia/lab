@@ -1,13 +1,5 @@
 https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
 
-## Topics
-* Aunque esté oculto. Al ser un elemento HTML, desde JS sabemos siempre su alto.
-
-
-openByIndex:
-
-openAll:
-
 ## Details
 * [Demo](https://barcia.github.io/lab/details/details.html)
 * After summary, should have only one parent container
