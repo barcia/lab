@@ -72,7 +72,6 @@ class Details {
 
 		// Apply a fixed height on the element
 		this.element.style.height = startHeight;
-		// Force the [open] attribute on the details element
 		this.state = true;
 		// Wait for the next frame to call the expand function
 		this.element.dispatchEvent(this.openEvent);
