@@ -1,0 +1,53 @@
+body {
+	display: flex;
+	place-content: center;
+	margin: 3rem;
+}
+
+.box {
+	position: relative;
+	width: 100vw;
+	height: 350px;
+	max-width: 500px;
+	background-color: white;
+	border: 4px solid black;
+	border-radius: 2rem;
+}
+
+
+/* Shadow */
+.box::before {
+	--offset-x: 0px;
+	--offset-y: 30px;
+	--blur-radius: 20px;
+	--spread-scale: 1.04;
+
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
+    transform: translate(var(--offset-x), var(--offset-y)) scale(var(--spread-scale));
+    filter: blur(var(--blur-radius));
+    border-radius: inherit;
+}
+
+/*
+* Prevents issues when the parent creates a
+* stacking context. (For example, using the transform
+* property )
+*/
+.box::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    border-radius: inherit;
+}
