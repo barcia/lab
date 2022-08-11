@@ -6,6 +6,7 @@
 
 ## References
 * https://web.dev/building-a-dialog-component/
+* https://css-tricks.com/dialog-components-roll-your-own/
 
 ## Methods
 - `open()`

@@ -1,0 +1,112 @@
+body {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+:where(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    a.Button
+),
+:where(input[type="file"])::file-selector-button {
+    --primary-color: hsl(209, 69%, 36%);
+    --primary-color-accent: hsl(209, 70%, 25%);
+    --reset-color: hsl(5, 69%, 36%);
+    --reset-color-accent: hsl(5, 70%, 25%);
+    --primary-color-disabled:hsl(209, 9%, 45%);
+    --color: white;
+
+    display: flex;
+    place-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border: none;
+    border-radius: 0.25rem;
+    font: inherit;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--color);
+    appearance: none;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+:where(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    a.Button
+) > :where(svg, [data-icon]) {
+    block-size: 1.25rem;
+    inline-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+:where(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    a.Button
+):hover,
+:where(input[type="file"])::file-selector-button:hover {
+    --primary-color: var(--primary-color-accent)
+}
+
+:where(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    a.Button
+):disabled,
+:where(input[type="file"])::file-selector-button:disabled {
+    --primary-color: var(--primary-color-disabled);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+:where(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    a.Button
+):focus-visible,
+:where(input[type="file"])::file-selector-button:focus-visible {
+    outline: 2px solid var(--primary-color);;
+    outline-offset: 2px;
+}
+
+
+:where(input[type="file"]) {
+    background-color: lightgray;
+    inline-size: 100%;
+    max-inline-size: max-content;
+}
+
+:where(
+    input[type="reset"]
+) {
+    --primary-color: var(--reset-color)
+}
+
+:where(
+    input[type="reset"]
+):hover {
+    --primary-color: var(--reset-color-accent)
+}
