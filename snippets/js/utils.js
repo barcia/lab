@@ -15,3 +15,10 @@ export const isArrowLeftKey = ev => ev.key === 'ArrowLeft' || ev.keyCode === 37;
 export const isArrowUpKey = ev => ev.key === 'ArrowUp' || ev.keyCode === 38;
 export const isArrowDownKey = ev => ev.key === 'ArrowDown' || ev.keyCode === 40;
 export const isEscKey = ev => ev.key === 'Escape' || ev.keyCode === 27;
+
+export const isPangram = string => {
+	const alphabet = [..."abcdefghijklmnopqrstuvwxyz"]
+	string = [...string.toLowerCase()]
+
+	return alphabet.every( letter => string.includes(letter) )
+}
