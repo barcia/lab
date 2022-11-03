@@ -1,0 +1,39 @@
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100dvh;
+	height: 100vh;
+}
+
+#box {
+	width: 256px;
+	height: 256px;
+	background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+	linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+	linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+	border-radius: 100vw;
+	filter: blur(16px);
+	margin: auto;
+	/* animation: spin 2s infinite cubic-bezier(0.60, 0.1, 0.80, 0.9); */
+	animation: pulse 2s infinite cubic-bezier(0.60, 0, 0.80, 1) alternate;
+}
+
+#box2 {
+	/* animation: spin 4s infinite cubic-bezier(0.60, 0.3, 0.80, 0.85); */
+}
+
+@keyframes pulse {
+	100% {
+		transform: scale(2);
+		filter: blur(42px);
+	}
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
