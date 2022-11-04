@@ -1,0 +1,33 @@
+h1 {
+	margin: 0;
+	font-size: 4rem;
+}
+
+.marquee {
+	display: flex;
+	overflow: hidden;
+	user-select: none;
+	position: relative;
+}
+ 
+.marquee > * {
+	flex-shrink: 0;
+	padding: 0 1rem;
+	animation: scroll 2s infinite linear;
+}
+
+@keyframes scroll {
+	from {
+	  transform: translateX(0);
+	}
+	to {
+	  transform: translateX(-100%);
+	}
+}
+
+
+
+/* Stop on hover */
+/* .marquee:hover > * {
+	animation-play-state: paused;
+} */
