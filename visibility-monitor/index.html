@@ -9,18 +9,8 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="./script.js" defer></script>
 	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			const sections = [...document.querySelectorAll('.section')]
-
-			const visibilityMonitor = new VisibilityMonitor(sections)
-
-			const dateosd = visibilityMonitor.get()
-
-			window.addEventListener('updateVisibilityMonitor', () => {
-				console.log('event');
-				const data = visibilityMonitor.get()
-
-				sections.forEach((section, index) => {
+		const printData = (sections, data) => {
+			sections.forEach((section, index) => {
 					section.innerHTML = `
 						<table>
 							<tbody>
@@ -43,6 +33,20 @@
 					section.dataset.visiblePercentage = data[index].visiblePercentage
 					section.dataset.viewportCoveredPercentage = data[index].viewportCoveredPercentage
 				})
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const sections = [...document.querySelectorAll('.section')]
+
+			const visibilityMonitor = new VisibilityMonitor(sections)
+
+			const data = visibilityMonitor.get()
+			printData(sections, data)
+
+			window.addEventListener('updateVisibilityMonitor', () => {
+				const data = visibilityMonitor.get()
+				printData(sections, data)
+
 			})
 		})
 	</script>
