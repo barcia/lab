@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="./script.js" defer></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const sections = [...document.querySelectorAll('.section')]
+
+			const visibilityMonitor = new VisibilityMonitor(sections)
+
+			const dateosd = visibilityMonitor.get()
+
+			window.addEventListener('updateVisibilityMonitor', () => {
+				console.log('event');
+				const data = visibilityMonitor.get()
+
+				sections.forEach((section, index) => {
+					section.innerHTML = `
+						<table>
+							<tbody>
+								<tr>
+									<td>Visible pixels</td>
+									<td>${data[index].visiblePixels}</td>
+								</tr>
+								<tr>
+									<td>Visible percentage</td>
+									<td>${data[index].visiblePercentage}</td>
+								</tr>
+								<tr>
+									<td>Viewport covered percentage</td>
+									<td>${data[index].viewportCoveredPercentage}</td>
+								</tr>
+							</tbody>
+						</table>
+					`
+					section.dataset.visiblePixels = data[index].visiblePixels
+					section.dataset.visiblePercentage = data[index].visiblePercentage
+					section.dataset.viewportCoveredPercentage = data[index].viewportCoveredPercentage
+				})
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<section class="section"></section>
+	<section class="section"></section>
+	<section class="section"></section>
+	<section class="section"></section>
+	<section class="section"></section>
+</body>
+
+</html>
