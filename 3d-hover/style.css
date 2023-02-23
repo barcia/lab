@@ -1,0 +1,25 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20vw;
+	transition: background-color 500ms ease-out;
+}
+
+body:has(#image:hover) {
+	background-color: hsla(42 66% 25% / 0.25);
+}
+
+#image {
+	width: 100%;
+	height: auto;
+	transition: box-shadow 0.05s, transform 0.05s;
+	border-radius: 0.5rem;
+}
+
+#image:hover {
+	box-shadow: 0 0 50px hsl(0 0% 0% / 0.5);
+	cursor: url('cross.png'), auto;
+}
