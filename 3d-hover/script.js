@@ -1,6 +1,4 @@
 const image = document.querySelector('#image')
-const height = image.clientHeight
-const width = image.clientWidth
 
 const tilt = (el, x, y) => {
 	const transforms = `
@@ -22,26 +20,32 @@ const resetTilt = (el) => {
 	el.style.transform = transforms
 }
 
-image.addEventListener('mousemove', ev => {
-	const { layerX, layerY } = ev
-
-	const yRotation = (
-		( layerX - width / 2 ) / width
-	) * 20
-
-	const xRotation = (
-		( layerY - height / 2 ) / height
-	) * 20
-
-	window.requestAnimationFrame(
-		() => tilt(image, xRotation, yRotation)
-
-	)
-})
 
 
-image.addEventListener('mouseout', ev => {
-	window.requestAnimationFrame(
-		() => resetTilt(image)
-	)
+window.addEventListener('load', () => {
+	const height = image.clientHeight
+	const width = image.clientWidth
+
+	image.addEventListener('mousemove', ev => {
+		const { layerX, layerY } = ev
+	
+		const yRotation = (
+			( layerX - width / 2 ) / width
+		) * 20
+	
+		const xRotation = (
+			( layerY - height / 2 ) / height
+		) * 20
+	
+		window.requestAnimationFrame(
+			() => tilt(image, xRotation, yRotation)
+		)
+	})
+	
+	
+	image.addEventListener('mouseout', ev => {
+		window.requestAnimationFrame(
+			() => resetTilt(image)
+		)
+	})
 })
