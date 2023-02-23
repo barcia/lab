@@ -2,6 +2,7 @@ https://css-tricks.com/how-to-animate-the-details-element-using-waapi/
 
 ## Details
 * [Demo](https://barcia.github.io/lab/details/details.html)
+* [Demo group](https://barcia.github.io/lab/details/detailsGroup.html)
 * After summary, should have only one parent container
 
 ### Extra features
