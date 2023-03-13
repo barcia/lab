@@ -1,0 +1,34 @@
+body {
+	margin: 16px;
+}
+
+article {
+	width: 100%;
+	max-width: 400px;
+	background-color: antiquewhite;
+	padding: 1rem;
+	position: relative;
+}
+
+article:has( a:is(:hover, :focus-visible) ) {
+	background-color: burlywood;
+}
+
+img {
+	width: 100%;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+small {
+	position: relative;
+}
