@@ -6,23 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="./style.css">
-	<script src="./script.js"></script>
+	<script type="module" src="./script.js"></script>
 </head>
 <body>
-	<button id="trigger">dialog</button>
+	<button type="button" aria-controls="modal-1">dialog</button>
 
-	<dialog id="dialog">
-		<div>Lorem ipsum</div>
-		<button autofocus id="close">Cerrar</button>
-		<button id="close">Aceptar</button>
-	</dialog>
+	<custom-dialog>
+		<dialog id="modal-1">
+			<div>Lorem ipsum</div>
+			<button type="button" autofocus class="js-close">Cerrar</button>
+			<button type="button">Aceptar</button>
+		</dialog>
+	</custom-dialog>
 
-	<a href="#">link</a>
-
-	<script>
-		const trigger = document.querySelector('#trigger')
-		const myDialog = new Modal(document.querySelector('#dialog'))
-		trigger.addEventListener('click', () => myDialog.show())
-	</script>
 </body>
 </html>
