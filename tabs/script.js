@@ -1,9 +1,10 @@
 const isArrowRightKey = ev => ev.key === 'ArrowRight' || ev.keyCode === 39;
 const isArrowLeftKey = ev => ev.key === 'ArrowLeft' || ev.keyCode === 37;
 
-class Tabs {
-	constructor(element) {
-		this.element = element;
+export default class Tabs extends HTMLElement {
+	constructor() {
+		super();
+		this.element = this;
 		this.tabList = this.element.querySelector('[role="tablist"]');
 		this.tabs = Array.from(this.tabList.querySelectorAll('[role="tab"]'));
 		this.tabPanels = Array.from(this.element.querySelectorAll('[role="tabpanel"]'));
@@ -43,14 +44,17 @@ class Tabs {
 		this.current.tab = tab;
 		this.current.tabIndex = this.tabs.findIndex( tab => tab === this.current.tab );
 		this.current.panel = panel;
+		this.element.dispatchEvent(new Event('change'))
 
 		// Active tab
 		tab.setAttribute("aria-selected", true);
 		tab.setAttribute('tabindex', 0);
+		tab.dispatchEvent(new Event('active'))
 
 		// Active panel
 		panel.hidden = false;
 		panel.setAttribute("aria-expanded", true)
+		panel.dispatchEvent(new Event('active'))
 
 		// Unselect other tabs
 		const otherTabs = this.tabs.filter( el => el.id !== tab.id);
@@ -102,8 +106,4 @@ class Tabs {
 	}
 }
 
-const TabsElements = Array
-	.from(document.querySelectorAll(".Tabs"))
-	.map((element) => new Tabs(element))
-
-	const myTab = TabsElements.find(tab => tab.element.id === "proba");
+customElements.define("custom-tabs", Tabs);

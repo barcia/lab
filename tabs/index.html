@@ -5,12 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<script src="./script.js" defer></script>
+	<script type="module" src="./script.js"></script>
 </head>
 <body>
 	<h1>Tabs</h1>
 
-	<section class="Tabs" id="proba">
+	<custom-tabs>
 		<header role="tablist" aria-label="Sample Tabs">
 			<button id="tab-1" role="tab" aria-controls="tabpanel-1">Tab 1</button>
 			<button id="tab-2" role="tab" aria-controls="tabpanel-2">Tab 2</button>
@@ -25,7 +25,22 @@
 			<div id="tabpanel-4" role="tabpanel" aria-labelledby="tab-4">Content 4</div>
 			<div id="tabpanel-5" role="tabpanel" aria-labelledby="tab-5">Content 5</div>
 		</div>
-	</section>
+	</custom-tabs>
+
+	<!-- <script type="module">
+		import Tabs from './script.js';
+
+		const TabsElements = Array
+			.from(document.querySelectorAll(".Tabs"))
+			.map((element) => {
+				new Tabs(element)
+
+				element.addEventListener('change', () => {
+					console.log('hola');
+				})
+			
+			})
+	</script> -->
 
 </body>
 </html>
