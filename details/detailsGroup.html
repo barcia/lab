@@ -6,35 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Details group</title>
 	<link rel="stylesheet" href="./style.css">
-	<script src="./script.js"></script>
+	<script type="module" src="./script.js"></script>
 </head>
 <body>
 
-	<section class="DetailsGroup">
-		<details>
+	<details-group id="faqs">
+		<details id="one">
 			<summary>Title</summary>
 			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
 		</details>
-		<details>
+		<details id="two">
 			<summary>Title</summary>
 			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
 		</details>
-		<details>
+		<details id="three">
 			<summary>Title</summary>
 			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
 		</details>
-		<details>
+		<details id="four">
 			<summary>Title</summary>
 			<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Culpa facere doloremque ipsa non quisquam beatae sequi<br>accusantium totam accusamus libero! Doloribus omnis<br>debitis eaque. Culpa cupiditate molestias rem odit ipsam!</div>
 		</details>
-	</section>
-
-	<script>
-		const AccordionGroups =
-		Array.from(document.querySelectorAll('.DetailsGroup'))
-		.forEach((el) => {
-			new DetailsGroup(el, onlyOneOpen = true);
-		});
-	</script>
+	</details-group>
 </body>
 </html>

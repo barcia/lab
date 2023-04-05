@@ -174,9 +174,10 @@ class Details {
 }
 
 
-class DetailsGroup {
-	constructor(element, onlyOneOpen = false) {
-		this.element = element;
+class DetailsGroup extends HTMLElement {
+	constructor(onlyOneOpen = true) {
+		super()
+		this.element = this;
 		this.items = Array.from(this.element.querySelectorAll('details')).map(item => new Details(item))
 		this.onlyOneOpen = onlyOneOpen
 		this.currentItem = undefined
@@ -220,6 +221,8 @@ class DetailsGroup {
 				nextItem.focus()
 			}
 		})
+
+		this.#getQueryParams()
 	}
 
 	#closeOthers(current) {
@@ -250,6 +253,18 @@ class DetailsGroup {
 		}
 	}
 
+	#getQueryParams() {
+		const url = new URL(window.location.href)
+		const myParam = url.searchParams.get(this.element.id);
+		if (myParam) {
+			this.openById(myParam)
+		}
+	}
+
+	openById(id) {
+		this.items.find(item => item.element.id === id).open()
+	}
+
 	openAll() {
 		this.onlyOneOpen
 		? this.items[0].open()
@@ -260,3 +275,5 @@ class DetailsGroup {
 		this.items.forEach(el => el.close());
 	}
 }
+
+customElements.define("details-group", DetailsGroup);
