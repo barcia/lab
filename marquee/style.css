@@ -1,33 +1,42 @@
-h1 {
-	margin: 0;
-	font-size: 4rem;
-}
-
 .marquee {
-	display: flex;
+	display: block;
 	overflow: hidden;
 	user-select: none;
 	position: relative;
 }
- 
-.marquee > * {
-	flex-shrink: 0;
-	padding: 0 1rem;
-	animation: scroll 2s infinite linear;
+
+.marquee-slider {
+	display: inline-flex;
+	flex-wrap: nowrap;
+	animation-name: marquee;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-play-state: paused;
+	animation-duration: var(--marquee-animation-duration);
 }
 
-@keyframes scroll {
+@media (prefers-reduced-motion: reduce) {
+	.marquee-slider {
+	  animation: none !important;
+	}
+}
+
+.marquee-slider > * {
+	display: inline-block;
+	flex-shrink: 0;
+	font-size: 3rem;
+}
+
+@keyframes marquee {
 	from {
 	  transform: translateX(0);
 	}
 	to {
-	  transform: translateX(-100%);
+	  transform: translateX(var(--marquee-translateX));
 	}
 }
 
-
-
-/* Stop on hover */
+/* Pause on hover */
 /* .marquee:hover > * {
-	animation-play-state: paused;
+	animation-play-state: paused !important;
 } */
