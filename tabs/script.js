@@ -1,6 +1,7 @@
 const isArrowRightKey = ev => ev.key === 'ArrowRight' || ev.keyCode === 39;
 const isArrowLeftKey = ev => ev.key === 'ArrowLeft' || ev.keyCode === 37;
 
+
 export default class Tabs extends HTMLElement {
 	constructor() {
 		super();
@@ -9,10 +10,14 @@ export default class Tabs extends HTMLElement {
 		this.tabs = Array.from(this.tabList.querySelectorAll('[role="tab"]'));
 		this.tabPanels = Array.from(this.element.querySelectorAll('[role="tabpanel"]'));
 		this.current = new Object();
+	}
+
+	connectedCallback() {
 		this.#init();
 	}
 
 	#init() {
+		// Add click event to tabs
 		this.tabs.forEach( tab => tab.addEventListener("click", () => this.#select(tab)));
 
 		// Check if any tab if pre-selected. Otherwise, select the first tab.
@@ -30,7 +35,7 @@ export default class Tabs extends HTMLElement {
 				isArrowRightKey(e) && currentTabIndex++;
 
 				if (currentTabIndex < 0) currentTabIndex = this.tabs.length - 1;
-				if (currentTabIndex > this.tabs.length -1) currentTabIndex = 0;
+				if (currentTabIndex > this.tabs.length - 1) currentTabIndex = 0;
 
 				this.#select(this.tabs[currentTabIndex]);
 				this.tabs[currentTabIndex].focus();
@@ -44,17 +49,15 @@ export default class Tabs extends HTMLElement {
 		this.current.tab = tab;
 		this.current.tabIndex = this.tabs.findIndex( tab => tab === this.current.tab );
 		this.current.panel = panel;
-		this.element.dispatchEvent(new Event('change'))
+		this.element.dispatchEvent(new CustomEvent('change', { detail: this.current }))
 
 		// Active tab
 		tab.setAttribute("aria-selected", true);
 		tab.setAttribute('tabindex', 0);
-		tab.dispatchEvent(new Event('active'))
 
 		// Active panel
 		panel.hidden = false;
 		panel.setAttribute("aria-expanded", true)
-		panel.dispatchEvent(new Event('active'))
 
 		// Unselect other tabs
 		const otherTabs = this.tabs.filter( el => el.id !== tab.id);
@@ -82,27 +85,22 @@ export default class Tabs extends HTMLElement {
 	}
 
 	selectByIndex(index, focus = false) {
+		if (typeof index !== 'number') throw new Error(`index must be a number.`);
 
-		if (typeof index === 'number') {
-
-			let validIndex = index - 1
-			if (index === 0) {
-				validIndex = 0
-			}
-			else if ( index < 0) {
-				Math.abs(index) > this.tabs.length ? validIndex = 0 : validIndex = this.tabs.length + index;
-			}
-			else if (index > this.tabs.length) {
-				validIndex = this.tabs.length - 1
-			}
-
-			const tab = this.tabs[validIndex];
-			this.#select(tab);
-			focus && tab.focus()
+		let validIndex = index - 1
+		if (index === 0) {
+			validIndex = 0
 		}
-		else {
-			throw new Error(`index must be a number.`);
+		else if ( index < 0) {
+			Math.abs(index) > this.tabs.length ? validIndex = 0 : validIndex = this.tabs.length + index;
 		}
+		else if (index > this.tabs.length) {
+			validIndex = this.tabs.length - 1
+		}
+
+		const tab = this.tabs[validIndex];
+		this.#select(tab);
+		focus && tab.focus()
 	}
 }
 
