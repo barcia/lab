@@ -7,24 +7,61 @@
 	scroll-behavior: smooth;
 	list-style: none;
 	margin: 0;
-	padding: 0;
+	padding: 1rem;
+	box-sizing: border-box;
+	/* cursor: grab; */
+
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+  }
+  
+  /* remove scrollbal */
+  .Carousel::-webkit-scrollbar {
+	display: none;
 }
 
-.Carousel li {
-	background-color: bisque;
+.Carousel:active {
+	/* cursor: grabbing; */
+	/* scroll-behavior: auto; */
+	/* scroll-snap-type: none; */
+  }
+
+.Carousel > * {
+	background-color: antiquewhite;
 	height: 300px;
 	min-width: 80vw;
 	border-radius: 10px;
-	border: 2px solid black;
+	border: 1px solid rgb(131, 131, 131);
 	scroll-snap-align: center;
-	transition: background-color 400ms;
+	transition: background-color 100ms ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
 }
 
-.Carousel li.is-active {
-	background-color: lightcoral;
+.Carousel li[aria-current="true"] {
+	background-color: burlywood;
 }
 
 
-#indicators button.is-active {
-	background-color: lightcoral;
+#indicators button[aria-current="true"] {
+	background-color: burlywood;
+}
+
+#indicators {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+#indicators button {
+	background-color: antiquewhite;
+	border: 1px solid rgb(131, 131, 131);
+	border-radius: 50%;
+	height: 1rem;
+	width: 1rem;
+	cursor: pointer;
+	transition: background-color 100ms ease-in-out;
 }

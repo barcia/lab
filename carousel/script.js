@@ -1,103 +1,184 @@
+
 class CarouselItemIndicator {
-	constructor(item) {
-		this.index = item.index
-		this.element = document.createElement('button');
-
-		this.element.innerText = this.index
-
-		console.log();
-
-		this.element.addEventListener('click', () => item.set())
+	constructor(carouselItem) {
+		this.carouselItem = carouselItem
+		this.options = carouselItem.options
+		this.indicators = this.options.indicators
+		this.id = this.options.carouselItemIndicatorId + (this.carouselItem.index + 1)
+		this.element = this.#createElement()
 	}
 
-	active() {
-		this.element.classList.add('is-active')
+	#createElement() {
+		const element = document.createElement('button')
+		element.id = this.id
+		element.setAttribute('aria-controls', this.carouselItem.id)
+		element.setAttribute('aria-labelledby', this.carouselItem.id)
+
+		this.indicators.appendChild(element)
+
+		element.addEventListener('click', () => {
+			this.carouselItem.carousel.go(this.carouselItem.index + 1)
+		})
+
+		return element
 	}
 
-	disable() {
-		this.element.classList.remove('is-active')
+	active(bool) {
+		this.element.setAttribute('aria-current', bool)
 	}
 }
 
 class CarouselItem {
-	constructor(item, index, array, carousel) {
-		this.element = item
+	constructor(element, index, carousel) {
+		this.element = element
 		this.index = index
-		this.array = array
 		this.carousel = carousel
-		this.indicator = new CarouselItemIndicator(this)
+		this.options = carousel.options
+		this.id = this.element.id || this.options.carouselItemId + (this.index + 1)
+		this.indicator = this.options.indicators ? new CarouselItemIndicator(this) : undefined
 
+		this.#init()
+	}
+
+	#init() {
+		this.element.id = this.id
+		this.element.setAttribute('controled-by', this.indicator?.id)
+		this.#setObserver()
+	}
+
+	#setObserver() {
 		const callback = entries => {
-			entries.forEach(entry => {
-				entry.isIntersecting === true
-				? this.active()
-				: this.disable()
-			})
+			entries.forEach(entry => this.#active(entry.isIntersecting))
 		};
 
-		const observer = new IntersectionObserver(callback, {
-			threshold: 0.60
-		});
+		const options = {
+			threshold: 1
+		}
+
+		const observer = new IntersectionObserver(callback, options);
 		observer.observe(this.element);
 	}
 
-	active() {
-		this.element.classList.add('is-active')
-		this.indicator.active()
+	#active(bool) {
+		this.element.setAttribute('aria-current', bool)
+		this.indicator?.active(bool)
+		if (!bool) return
+		this.carousel.set(this.index);
 	}
 
-	disable() {
-		this.element.classList.remove('is-active')
-		this.indicator.disable()
-	}
-
-	set() {
-		this.carousel.element.scrollLeft = this.carousel.element.scrollLeft + this.element.getBoundingClientRect().x
-		this.carousel.current = this;
+	getPosition() {
+		return this.element.getBoundingClientRect().x
 	}
 }
 
 
 
 class Carousel {
-	constructor(element) {
+	constructor(element, options) {
+
+		const defaultOptions = {
+			carouselItemId: 'carousel-item-',
+			carouselItemIndicatorId: 'carousel-item-indicator-',
+			indicators: undefined,
+			callback: undefined
+		}
+
 		this.element = element
-		this.items = [...this.element.querySelectorAll('li')].map((item, index, array) => new CarouselItem(item, index, array, this))
-		this.current = this.items[0]; // preselected
+		this.options = {...defaultOptions, ...options}
+		this.childs = [...this.element.children]
+		this.items = [...this.childs].map((element, index) => this.#createItem(element, index) );
 
-		this.#showIndicators()
+		// check if this.options.indicators if a HTML element
+		if (this.options.indicators instanceof HTMLElement) {
+			this.options.indicators = this.options.indicators
+		} else {
+			// this.options.indicators = document.querySelector(this.options.indicators)
+			this.options.indicators = undefined
+		}
+
+
+		if (this.options.callback) {
+			this.element.addEventListener('slide', this.options.callback)
+		  }
 	}
-
-
-	#showIndicators() {
-		const box = document.querySelector('#indicators')
-
-		this.items.forEach(item => {
-			box.appendChild(item.indicator.element)
+	
+	createSlideEvent() {
+		this.event = new CustomEvent('slide', {
+			detail: {
+				currentItem: this.currentItem.element,
+				nextItem: this.nextItem?.element,
+				prevItem: this.prevItem?.element,
+				isLast: this.isLast(),
+				isFirst: this.isFirst()
+			}
 		})
 	}
 
-	next() {
-		this.current.index < this.items.length - 1
-		? this.items[this.current.index + 1].set()
-		: this.first()
-	}
 
-	prev() {
-		this.current.index > 0
-		? this.items[this.current.index - 1].set()
-		: this.last()
-	}
-
-	first() {
-		this.items.at(0).set()
-	}
-
-	last() {
-		this.items.at(-1).set()
+	#createItem(item, index) {
+		return new CarouselItem(item, index, this)
 	}
 
 	set(n) {
-		this.items.at(parseInt(n) + 1).set()
+		this.currentItemIndex = n
+		this.nextItemIndex = n + 1
+		this.prevItemIndex = n - 1;
+		if (this.options.callback) {
+			this.createSlideEvent()
+			this.element.dispatchEvent(this.event)
+		}
 	}
+
+	#scrollTo(item) {
+		this.element.scrollLeft += item.getPosition()
+	}
+
+	get currentItem() {
+		return this.items[this.currentItemIndex]
+	}
+
+	get nextItem() {
+		return this.items[this.nextItemIndex]
+	}
+
+	get prevItem() {
+		return this.items[this.prevItemIndex]
+	}
+
+	next() {
+		if (this.isLast()) return
+		this.#scrollTo(this.nextItem)
+	}
+
+	prev() {
+		if (this.isFirst()) return
+		this.#scrollTo(this.prevItem)
+	}
+
+	first() {
+		this.#scrollTo(this.items[0])
+	}
+
+	last() {
+		const lastItemIndex = this.items.length - 1
+		this.#scrollTo(this.items[lastItemIndex])
+	}
+
+	go(n) {
+		n -= 1
+		if (n < 0) return this.first()
+		if (n > this.items.length - 1) return this.last()
+		this.#scrollTo(this.items[n])
+	}
+	
+	isLast() {
+		return this.currentItemIndex === this.items.length - 1
+	}
+
+	isFirst() {
+		return this.currentItemIndex === 0
+	}
+
+
 }
+
