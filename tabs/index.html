@@ -18,7 +18,7 @@
 			<button id="tab-4" role="tab" aria-controls="tabpanel-4">Tab 4</button>
 			<button id="tab-5" role="tab" aria-controls="tabpanel-5">Tab 5</button>
 		</header>
-		<div class="el1">
+		<div>
 			<div id="tabpanel-1" role="tabpanel" aria-labelledby="tab-1">Content 1</div>
 			<div id="tabpanel-2" role="tabpanel" aria-labelledby="tab-2">Content 2</div>
 			<div id="tabpanel-3" role="tabpanel" aria-labelledby="tab-3">Content 3</div>
@@ -27,7 +27,16 @@
 		</div>
 	</custom-tabs>
 
-	<!-- <script type="module">
+	<script>
+		const tabs = document.querySelector('custom-tabs');
+		tabs.addEventListener('change', (event) => {
+			// console.log(event.detail);
+		})
+
+		console.log(tabs.selectById());
+	</script>
+<!-- 
+	<script type="module">
 		import Tabs from './script.js';
 
 		const TabsElements = Array
