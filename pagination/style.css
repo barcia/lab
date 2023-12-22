@@ -1,0 +1,21 @@
+.Pagination {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: fit-content;
+}
+
+.Pagination a {
+	padding: 0.25rem;
+	border: 1px solid grey;
+	border-radius: 0.25rem;
+	text-decoration: none;
+}
+
+.Pagination a[aria-current="page"] {
+	background-color: #eee;
+	pointer-events: none;
+}
