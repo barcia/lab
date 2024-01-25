@@ -44,6 +44,7 @@ class CarouselItem {
 		this.element.id = this.id
 		this.element.setAttribute('controled-by', this.indicator?.id)
 		this.#setObserver()
+		this.#goOnClick()
 	}
 
 	#setObserver() {
@@ -57,6 +58,13 @@ class CarouselItem {
 
 		const observer = new IntersectionObserver(callback, options);
 		observer.observe(this.element);
+	}
+
+	#goOnClick() {
+		this.element.addEventListener('click', () => {
+			if (this.carousel.currentItemIndex === this.index) return
+			this.carousel.go(this.index + 1)
+		})
 	}
 
 	#active(bool) {
@@ -92,7 +100,6 @@ class Carousel {
 		if (this.options.indicators instanceof HTMLElement) {
 			this.options.indicators = this.options.indicators
 		} else {
-			// this.options.indicators = document.querySelector(this.options.indicators)
 			this.options.indicators = undefined
 		}
 
