@@ -1,0 +1,25 @@
+.noise {
+	background-image: url('noise.png');
+	pointer-events: none;
+	z-index: 1000;
+	position: fixed;
+	inset: -5%;
+	overflow: hidden;
+	mix-blend-mode: multiply;
+	animation: noise 2s steps(4) infinite;
+}
+
+@keyframes noise {
+	0%, 20%, 40%, 60%, 80%, 100% {
+		transform: translate(-5%, -5%);
+	}
+	10%, 30%, 50%, 70%, 90% {
+		transform: translate(5%, 5%);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.noise {
+		animation: none;
+	}
+}
