@@ -1,0 +1,49 @@
+body {
+	margin: 0;
+}
+
+.menu {
+	background-color: #ccc;
+	width: 500px;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
+.submenu {
+	background-color: #bbb;
+	position: absolute;
+	inset: 0;
+}
+
+details[open] .submenu {
+	animation: .2s linear slidein;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	padding: 0.5rem 1rem;
+}
+
+li:hover {
+	background-color: #ddd;
+}
+
+summary {
+	cursor: pointer;
+	list-style: none;
+}
+
+@keyframes slidein {
+	from {
+		transform: translate(100%);
+	}
+	to {
+		transform: translate(0);
+	}
+}
