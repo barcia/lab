@@ -1,0 +1,15 @@
+main {
+	min-height: 150vh;
+	background-color: lightcoral;
+}
+
+footer {
+	height: 400px;
+	background-color: blanchedalmond;
+	position: sticky;
+	bottom: 0;
+	z-index: -1;
+
+	display: grid;
+	place-items: center;
+}
