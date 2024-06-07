@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Popover API</title>
+</head>
+<body>
+	<button popovertarget="my-popover">Open Popover</button>
+
+	<div id="my-popover" popover>
+		<button popovertarget="my-popover" popovertargetaction="hide">Close</button>
+		<p>I am a popover with more information. Hit <kbd>esc</kbd> or click away to close me.</p>
+	</div>
+</body>
+</html>
