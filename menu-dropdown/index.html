@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu Dropdown</title>
+	<link rel="stylesheet" href="https://unpkg.com/@barcia/corecss">
+	<link rel="stylesheet" href="style.css">
+	<script src="./script.js" defer></script>
+</head>
+<body>
+	
+	<nav class="menu">
+		<ul class="is-right" id="mainMenu">
+			<li><a href="#">Item 1</a></li>
+			<li>
+				<details>
+					<summary>Item 2</summary>
+					<ul>
+						<li><a href="#">Item 2.1</a></li>
+						<li>
+							<details>
+								<summary>Item 2.2</summary>
+								<ul>
+									<li><a href="#">Item 2.2.1</a></li>
+									<li><a href="#">Item 2.2.2</a></li>
+									<li><a href="#">Item 2.2.3</a></li>
+								</ul>
+							</details>
+						</li>
+						<li><a href="#">Item 2.3</a></li>
+					</ul>
+				</details>
+			</li>
+			<li><a href="#">Item 3</a></li>
+		</ul>
+	</nav>
+
+
+	<form id="settings">
+		<p>
+			<label for="hoverzone">See <i>hover</i> zone in submenus:</label>
+			<input type="checkbox" id="hoverzone" name="hoverzone">
+		</p>
+	</form>
+
+	<script>
+		(function() {
+			const settings = document.getElementById('settings');
+			const menu = document.querySelector('.menu');
+			const hoverzone = document.getElementById('hoverzone');
+			settings.addEventListener('change', (event) => {
+				if (event.target === hoverzone) {
+					menu.classList.toggle('settings-hoverzone');
+				}
+			});
+		})();
+	</script>
+
+	<style>
+		#settings {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			background-color: lightgray;
+			padding: 1em;
+		}
+
+		#settings p {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.menu.settings-hoverzone details ul {
+			background-color: lightgreen;
+		}
+	</style>
+
+</body>
+</html>
