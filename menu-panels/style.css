@@ -20,6 +20,10 @@ details[open] .submenu {
 	animation: .2s linear slidein;
 }
 
+details[open] .submenu.is-quitting {
+	animation: .2s linear slideout;
+}
+
 ul {
 	list-style-type: none;
 	padding: 0;
@@ -45,5 +49,14 @@ summary {
 	}
 	to {
 		transform: translate(0);
+	}
+}
+
+@keyframes slideout {
+	from {
+		transform: translate(0);
+	}
+	to {
+		transform: translate(100%);
 	}
 }
