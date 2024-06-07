@@ -1,3 +1,6 @@
+# relative random
+
+```js
 function getRelativeRandomItems(data, items) {
     const dataClone = [...data];
     const selectedItems = [];
@@ -36,3 +39,4 @@ function getRelativeRandomItems(data, items) {
   const elementosAleatorios = getRelativeRandomItems(datos, 1);
   console.log(elementosAleatorios);
   
+```

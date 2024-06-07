@@ -1,3 +1,6 @@
+# Likes
+
+```js
 const showLikes = (names, maxVisibleNames = 3) => {
 	if (names.length === 0) {
 		return "no one likes this"
@@ -33,3 +36,5 @@ console.log(showLikes(likes2))
 console.log(showLikes(likes3))
 console.log(showLikes(likes4))
 console.log(showLikes(likes5))
+
+```
