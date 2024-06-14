@@ -1,0 +1,38 @@
+body {
+	background-color: black;
+	margin: 100px;
+}
+
+.Card {
+	--borderRadius: 16px;
+	--transitionDuration: 0.32s;
+	--translateY: 20px;
+
+	background: hsla(0, 0%, 16%, 0.6);
+	color: white;
+	width: 300px;
+	border-radius: var(--borderRadius);
+	border: 1px solid hsla(0, 0%, 100%, .1);
+	padding: 16px;
+	transform: translateY(0);
+	transition: transform var(--transitionDuration) ease-in-out;
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: var(--borderRadius);
+		transition: transform var(--transitionDuration) ease-in-out;
+	}
+
+	&:hover {
+		transform: translateY(calc(var(--translateY) * -1));
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			transform: translateY(var(--translateY));
+		}
+	}
+}
