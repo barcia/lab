@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gallery</title>
+	<link rel="stylesheet" href="https://unpkg.com/@barcia/corecss">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./script.js" defer></script>
+
+	<link rel="preload" as="image" href="./images/image-1.jpg">
+	<link rel="preload" as="image" href="./images/image-2.jpg">
+	<link rel="preload" as="image" href="./images/image-3.jpg">
+	<link rel="preload" as="image" href="./images/image-4.jpg">
+	<link rel="preload" as="image" href="./images/image-5.jpg">
+	<link rel="preload" as="image" href="./images/image-6.jpg">
+	<link rel="preload" as="image" href="./images/image-7.jpg">
+</head>
+<body>
+	<ul class="Gallery">
+		<li>
+			<img src="./images/image-1-low.jpg" data-src-large="./images/image-1.jpg" alt="">
+		</li>
+		<li>
+			<img src="./images/image-2-low.jpg" data-src-large="./images/image-2.jpg" alt="">
+		</li>
+		<li>
+			<img src="./images/image-3-low.jpg" data-src-large="./images/image-3.jpg" alt="">
+		</li>
+		<li>
+			<img src="./images/image-4-low.jpg" data-src-large="./images/image-4.jpg" alt="">
+		</li>	
+		<li>
+			<img src="./images/image-5-low.jpg" data-src-large="./images/image-5.jpg" alt="">
+		</li>
+		<li>
+			<img src="./images/image-6-low.jpg" data-src-large="./images/image-6.jpg" alt="">
+		</li>
+		<li>
+			<img src="./images/image-7-low.jpg" data-src-large="./images/image-7.jpg" alt="">
+		</li>
+	</ul>
+
+	<dialog class="GalleryDialog">
+		<div class="control">
+			<button id="close">Close</button>
+			<button id="prev">prev</button>
+			<button id="next">next</button>
+		</div>
+		<ul class="large-gallery"></ul>
+	</dialog>
+</body>
+</html>
