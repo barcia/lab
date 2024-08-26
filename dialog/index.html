@@ -2,22 +2,32 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="./style.css">
-	<script type="module" src="./script.js"></script>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<button type="button" aria-controls="modal-1">dialog</button>
+	<button>Open dialog</button>
 
-	<custom-dialog>
-		<dialog id="modal-1">
-			<div>Lorem ipsum</div>
-			<button type="button" autofocus class="js-close">Cerrar</button>
-			<button type="button">Aceptar</button>
-		</dialog>
-	</custom-dialog>
-
+	<dialog>
+		<h1>Dialog</h1>
+		<p>Dialog content</p>
+		<button type="submit">Close dialog</button>
+	</dialog>
 </body>
+
+<script>
+	const button = document.querySelector('button');
+	const dialog = document.querySelector('dialog');
+	const closeButton = dialog.querySelector('button');
+
+	button.addEventListener('click', () => {
+		dialog.showModal();
+	});
+
+	closeButton.addEventListener('click', () => {
+		dialog.close();
+	});
+</script>
+
 </html>

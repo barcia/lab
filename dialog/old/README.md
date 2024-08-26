@@ -1,5 +1,5 @@
 # Animated Dialog
-* [Demo](https://barcia.github.io/lab/dialog/index.html)
+* [Demo](https://barcia.github.io/lab/dialog/old/index.html)
 * Lock body scroll (optional)
 * Close on Esc press
 - [ ] Remove unused eventListeners
