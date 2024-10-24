@@ -1,0 +1,11 @@
+ul {
+    list-style: none;
+}
+
+label:has(input[type="checkbox"][aria-checked="mixed"]) {
+    color: gray;
+
+    &::after {
+        content: '(mixed)';
+    }
+}
