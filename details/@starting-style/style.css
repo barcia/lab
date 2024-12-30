@@ -1,0 +1,26 @@
+details div {
+	--transition-time: 1s;
+	--transition-timing-function: ease-out;
+
+	transition: 
+		display var(--transition-time) allow-discrete, 
+		overlay var(--transition-time) allow-discrete;
+
+	transition-timing-function: var(--transition-timing-function);
+	height: 0;
+}
+
+details #details-content div {
+	background-color: red;
+}
+
+details[open] div {
+	height: 100%;
+}
+
+@starting-style {
+	details[open] div {
+		height: 0;
+
+	}
+}
